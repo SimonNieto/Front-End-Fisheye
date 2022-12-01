@@ -1,17 +1,13 @@
-function photographerFactory(data) {
-    const { name, portrait } = data;
+import PhotographerModel from "../models/photographer.js";
+import PhotographerTemplate from "../templates/photographer.js";
 
-    const picture = `assets/photographers/${portrait}`;
+/**
+ * 
+ */
+export default class PhotographerFactory {
+  constructor(data) {
+    this._data = new PhotographerModel(data);
 
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
-        return (article);
-    }
-    return { name, picture, getUserCardDOM }
+    return new PhotographerTemplate(this._data);
+  }
 }
